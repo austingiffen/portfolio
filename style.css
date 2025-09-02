@@ -100,3 +100,51 @@ section h2 {
   margin-bottom: 10px;
 }
 
+/* Hamburger icon */
+.hamburger {
+  font-size: 28px;
+  cursor: pointer;
+  padding: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Sidebar menu (hidden by default) */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -200px; /* Hidden off screen */
+  width: 200px;
+  height: 100%;
+  background-color: #333;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+  color: #ffd700;
+}
+
+/* Show the sidebar when it's active */
+.sidebar.active {
+  left: 0;
+}
