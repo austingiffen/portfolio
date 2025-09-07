@@ -136,15 +136,34 @@ footer {
 }
 
 /* Sidebar (Mobile Navigation) */
-.hamburger {
-  font-size: 28px;
-  cursor: pointer;
-  padding: 15px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
+/* Hamburger base style */
+.hamburger span {
+  height: 4px;
+  width: 100%;
+  background-color: #333;  /* default black */
+  border-radius: 2px;
+  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
 }
+
+/* Fade to white and animate into X */
+.hamburger.active span {
+  background-color: white;
+}
+
+/* Animation for "X" transformation */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+
 
 .sidebar {
   position: fixed;
