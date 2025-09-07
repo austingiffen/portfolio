@@ -17,7 +17,18 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  perspective: none;
+}
+
+/* new wrapper around the main content that needs parallax/3D */
+.parallax-wrapper {
   perspective: 1000px;
+  /* only the stuff inside this wrapper will be affected by 3D transforms */
+}
+
+/* prevent horizontal scroll when sidebar is off-screen */
+html, body {
+  overflow-x: hidden;
 }
 
 @keyframes gradientShift {
