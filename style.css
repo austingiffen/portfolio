@@ -311,3 +311,27 @@ footer {
 .contact-item:hover img {
   transform: scale(1.1);
 }
+
+.projects .project {
+  display: flex;
+  flex-wrap: wrap; /* allows wrapping on smaller screens */
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between; /* optional, for spacing */
+}
+
+.projects .project img {
+  width: 240px;
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  order: 2; /* forces image to appear after text */
+  flex-shrink: 0; /* prevents image from shrinking */
+}
+
+.projects .project > div, /* Assuming your text is wrapped in a div */
+.projects .project > p {
+  flex: 1 1 60%; /* text takes up to 60% width, adjust as needed */
+  order: 1; /* text first */
+  min-width: 200px; /* avoid too narrow */
+}
