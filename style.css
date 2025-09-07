@@ -10,10 +10,8 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  background-size: 400% 400%;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 25%, #2c5364 50%, #203a43 75%, #0f2027 100%);
+  background-size: 100% 300%;
   animation: gradientShift 15s ease infinite;
   color: #e0e0e0;
   max-width: 1200px;
@@ -59,7 +57,6 @@ p {
 
 /* Section Layout */
 section {
-  section {
   margin-bottom: 60px;
   padding: 40px 20px;
   background: rgba(255, 255, 255, 0.05);
@@ -68,48 +65,15 @@ section {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-section {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
   transform-style: preserve-3d;
-  transition: transform 0.5s ease;
 }
 
 section:hover {
-  transform: rotateY(2deg) translateY(-4px);
+  /* Remove hover tilt to avoid conflict */
+  transform: none;
 }
 
-a {
-  color: #00e5ff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-a:hover {
-  color: #00ffff;
-  text-shadow: 0 0 8px #00ffff;
-}
-
-h2 {
-  color: #00e5ff;
-  text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
-}
-
-
-}
-
-section:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #0077cc;
-  text-align: center;
-}
 
 /* Projects Section */
 .projects .project {
