@@ -314,24 +314,35 @@ footer {
 
 .projects .project {
   display: flex;
-  flex-wrap: wrap; /* allows wrapping on smaller screens */
+  align-items: flex-start;
   gap: 20px;
-  align-items: center;
-  justify-content: space-between; /* optional, for spacing */
+  flex-wrap: wrap; /* ensures it stacks on small screens */
 }
 
-.projects .project img {
+.projects .project > img {
   width: 240px;
   max-width: 100%;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  order: 2; /* forces image to appear after text */
-  flex-shrink: 0; /* prevents image from shrinking */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  order: 2; /* forces image to appear on the right */
+  flex-shrink: 0;
 }
 
-.projects .project > div, /* Assuming your text is wrapped in a div */
-.projects .project > p {
-  flex: 1 1 60%; /* text takes up to 60% width, adjust as needed */
-  order: 1; /* text first */
-  min-width: 200px; /* avoid too narrow */
+.projects .project > div {
+  flex: 1 1 60%;
+  order: 1;
+  min-width: 250px;
 }
+
+@media (max-width: 768px) {
+  .projects .project {
+    flex-direction: column;
+  }
+
+  .projects .project > img,
+  .projects .project > div {
+    order: initial; /* reset order for small screens */
+    width: 100%;
+  }
+}
+
