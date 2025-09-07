@@ -1,377 +1,309 @@
-/* Reset & Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* =========================
+   Austin Giffen — style.css
+   Reworked: high contrast + space background + parallax layers
+   Minimal HTML change: add .space-bg block inside .parallax-wrapper
+   ========================= */
+
+/* -------------------------
+   Variables / Reset
+   ------------------------- */
+:root{
+  --bg-ink: #05060a;            /* page background (very dark) */
+  --card-bg: rgba(8,10,18,0.72);
+  --card-strong: rgba(255,255,255,0.06);
+  --muted: #bfcfe0;
+  --text: #e9f6ff;
+  --accent: #7be0ff;
+  --accent-2: #9b7bff;
+  --glass: rgba(255,255,255,0.03);
+  --sidebar-width: 260px;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+html, body { height:100%; overflow-x:hidden; }
 
+/* Base body */
 body {
-  background: linear-gradient(135deg, #0f2027 0%, #203a43 25%, #2c5364 50%, #203a43 75%, #0f2027 100%);
-  background-size: 100% 300%;
-  animation: gradientShift 15s ease infinite;
-  color: #e0e0e0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background: var(--bg-ink);
+  color: var(--text);
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  perspective: none;
-}
-
-/* new wrapper around the main content that needs parallax/3D */
-.parallax-wrapper {
-  perspective: 1000px;
-  /* only the stuff inside this wrapper will be affected by 3D transforms */
-}
-
-/* prevent horizontal scroll when sidebar is off-screen */
-html, body {
-  overflow-x: hidden;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Typography */
-h1, h2, h3, h4 {
-  font-weight: 700;
-  color: #222;
-}
-
-p {
-  margin-top: 8px;
-  font-size: 1rem;
-  color: #555;
-}
-
-/* Hero Section */
-.hero {
-  text-align: center;
-  margin-bottom: 60px;
-  padding: 40px 20px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.profile-pic {
-  width: 140px;
-  border-radius: 50%;
-  margin-bottom: 15px;
-  border: 3px solid #0077cc;
-}
-
-/* Section Layout */
-section {
-  margin-bottom: 60px;
-  padding: 40px 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  transform-style: preserve-3d;
-}
-
-section:hover {
-  /* Remove hover tilt to avoid conflict */
-  transform: none;
-}
-
-
-/* Projects Section */
-.projects .project {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.projects .project img {
-  width: 240px;
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Links */
-a {
-  color: #0077cc;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #005999;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  margin-top: 60px;
-  font-size: 0.9rem;
-  color: #777;
-}
-
-/* Navigation Bar */
-.navbar {
-  background-color: #ffffff;
-  padding: 12px 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.navbar ul {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  list-style: none;
-  flex-wrap: wrap;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: #0077cc;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.navbar a:hover {
-  color: #005999;
-}
-
-/* Sidebar (Mobile Navigation) */
-/* Hamburger base style */
-.hamburger {
-  width: 30px;
-  height: 25px;
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-}
-
-.hamburger span {
-  height: 4px;
-  width: 100%;
-  background-color: #333;  /* default black */
-  border-radius: 2px;
-  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* Fade to white and animate into X */
-.hamburger.active span {
-  background-color: white;
-}
-
-/* Animation for "X" transformation */
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
-
-
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -240px;
-  width: 240px;
-  height: 100%;
-  background-color: #333;
-  padding-top: 60px;
-  transition: left 0.3s ease;
-  z-index: 1001;
-}
-
-.sidebar.active {
-  left: 0;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  margin: 20px 0;
-  text-align: center;
-}
-
-.sidebar ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  transition: color 0.3s;
-}
-
-.sidebar ul li a:hover {
-  color: #ffd700;
-}
-
-/* Awards Grid (from awards section) */
-.awards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.award-card {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.award-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.award-card h3 {
-  font-size: 1.2rem;
-  color: #0077cc;
-  margin-bottom: 10px;
-}
-
-.award-card p {
-  font-size: 0.95rem;
-  color: #555;
   line-height: 1.5;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .projects .project {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .profile-pic {
-    width: 100px;
-  }
-
-  .navbar ul {
-    gap: 15px;
-    flex-direction: column;
-  }
-
-  section {
-    padding: 30px 15px;
-  }
-
-  .award-card h3 {
-    font-size: 1.1rem;
-  }
-
-  .award-card p {
-    font-size: 0.9rem;
-  }
+/* Parallax wrapper — keeps perspective local */
+.parallax-wrapper {
+  perspective: 1000px;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
 }
 
-/*contact section */
-.contact {
-  text-align: center;
-  padding: 40px 20px;
-  background-color: #fff;
+/* =========================
+   SPACE BACKGROUND (layers)
+   These layers are fixed and visually parallax when page scrolls.
+   We provide visual depth without needing JS; the small data-speed attrs
+   are available if you add JS later for stronger parallax.
+   ========================= */
+.space-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;                 /* behind main content */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Generic layer settings */
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  background-position: center;
+  background-size: cover;
+  will-change: transform, opacity;
+  opacity: 1;
+  transform: translate3d(0,0,0);
+  mix-blend-mode: screen;
+}
+
+/* faint distant stars (big tiling pattern) */
+#stars-1{
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.85) 0, transparent 55%),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.8) 0, transparent 55%),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.7) 0, transparent 55%);
+  background-size: 700px 700px, 600px 600px, 1000px 1000px;
+  opacity: 0.45;
+  filter: blur(.2px);
+  animation: starDrift 90s linear infinite;
+}
+
+/* brighter mid stars */
+#stars-2{
+  background-image:
+    radial-gradient(1.5px 1.5px at 15% 10%, rgba(255,255,255,1) 0, transparent 55%),
+    radial-gradient(1px 1px at 35% 40%, rgba(255,255,255,0.95) 0, transparent 55%);
+  background-size: 520px 520px, 420px 420px;
+  opacity: 0.75;
+  filter: blur(.6px);
+  animation: starDrift 50s linear infinite;
+}
+
+/* colorful, blurred nebula */
+#nebula {
+  background-image:
+    radial-gradient(600px 300px at 20% 30%, rgba(155,123,255,0.08), transparent 40%),
+    radial-gradient(500px 300px at 80% 60%, rgba(123,224,255,0.06), transparent 30%),
+    radial-gradient(420px 220px at 50% 20%, rgba(123,123,255,0.05), transparent 35%);
+  opacity: 0.95;
+  filter: blur(30px) saturate(120%);
+  mix-blend-mode: screen;
+  animation: nebulaFloat 45s ease-in-out infinite;
+}
+
+/* foreground planet/shape */
+#planet {
+  background-image:
+    radial-gradient(circle at 35% 45%, rgba(255,255,255,0.06), transparent 30%),
+    radial-gradient(circle at 70% 75%, rgba(0,0,0,0.6) 0, rgba(0,0,0,0.85) 55%);
+  opacity: 0.95;
+  clip-path: circle(35% at 85% 85%);
+  filter: blur(8px) contrast(110%);
+  mix-blend-mode: overlay;
+  transform-origin: center;
+}
+
+/* subtle animations for interest */
+@keyframes starDrift {
+  from { transform: translate3d(0,0,0); }
+  to   { transform: translate3d(-30px,-20px,0); }
+}
+@keyframes nebulaFloat {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-18px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  background: linear-gradient(180deg, rgba(6,8,12,0.75), rgba(6,8,12,0.55));
+  backdrop-filter: blur(6px);
+  padding: 12px 16px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-top: 60px;
+  margin: 14px 0;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+.navbar ul {
+  display:flex;
+  gap:22px;
+  justify-content:center;
+  list-style:none;
+  align-items:center;
+}
+.navbar a {
+  color: var(--text);
+  font-weight:700;
+  text-decoration:none;
+}
+.navbar a:hover { color: var(--accent); }
+
+/* =========================
+   HERO / SECTIONS / CARDS
+   ========================= */
+.hero {
+  text-align:center;
+  margin-bottom:40px;
+  padding:36px 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:14px;
+  border:1px solid var(--card-strong);
+  box-shadow: 0 6px 24px rgba(2,4,8,0.6);
+  z-index:10;
+  position:relative;
+}
+.profile-pic{
+  width:140px;
+  border-radius:50%;
+  margin-bottom:14px;
+  border:3px solid rgba(123,224,255,0.18);
 }
 
-.contact h2 {
-  font-size: 2rem;
-  color: #0077cc;
-  margin-bottom: 20px;
+/* headings & text */
+h1,h2,h3,h4 { color: var(--text); font-weight:800; }
+p { color: var(--muted); margin-top:8px; font-size:1rem; }
+
+/* general sections (cards) */
+section{
+  margin-bottom:48px;
+  padding:28px;
+  background: var(--card-bg);
+  border-radius:12px;
+  border:1px solid var(--card-strong);
+  box-shadow: 0 8px 26px rgba(0,0,0,0.6);
+  z-index:10;
+  position:relative;
 }
 
-.contact-container {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  align-items: center;
+/* Projects layout preserved */
+.projects .project{
+  display:flex;
+  gap:20px;
+  margin-bottom:20px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.projects .project > img{
+  width:240px; max-width:100%; border-radius:10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  order:2; flex-shrink:0;
+}
+.projects .project > div { flex:1 1 60%; order:1; min-width:250px; }
+
+/* Links */
+a { color: var(--accent); text-decoration:none; font-weight:600; }
+a:hover { color: var(--accent-2); }
+
+/* Footer */
+footer {
+  text-align:center;
+  margin-top:36px;
+  font-size:0.9rem;
+  color:var(--muted);
+  z-index:10;
 }
 
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: #0077cc;
-  font-weight: 500;
-  transition: transform 0.2s ease;
+/* =========================
+   SIDEBAR & HAMBURGER (keeps your existing structure)
+   ========================= */
+.hamburger {
+  width:30px; height:25px;
+  position:fixed; top:20px; left:20px;
+  z-index:2000;
+  display:flex; flex-direction:column; justify-content:space-between;
+  cursor:pointer;
+  background:transparent; padding:4px;
+  border-radius:6px;
+}
+.hamburger span{
+  height:4px; width:100%; border-radius:3px;
+  background: var(--text);
+  transition: transform .28s, opacity .2s, background-color .2s;
 }
 
-.contact-item img {
-  width: 28px;
-  height: 28px;
-  transition: transform 0.2s ease;
+/* when script toggles 'active' on hamburger */
+.hamburger.active span { background: var(--accent); }
+.hamburger.active span:nth-child(1){ transform: rotate(45deg) translate(5px,5px); }
+.hamburger.active span:nth-child(2){ opacity:0; }
+.hamburger.active span:nth-child(3){ transform: rotate(-45deg) translate(5px,-5px); }
+
+/* Sidebar — note we target #sidebar (matches your index.html) */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100%;
+  transform: translateX(-100%); /* hide by default */
+  transition: transform .28s cubic-bezier(.2,.9,.2,1);
+  background: linear-gradient(180deg,#0c0c12,#06060a);
+  padding-top:72px;
+  z-index:1600;
+  box-shadow: 6px 0 30px rgba(0,0,0,0.6);
+}
+#sidebar.active { transform: translateX(0); }
+
+#sidebar ul { list-style:none; padding:0; margin:0; }
+#sidebar li { margin:18px 0; text-align:center; }
+#sidebar a { color: #fff; font-size:18px; font-weight:600; text-decoration:none; }
+#sidebar a:hover { color: #ffd766; }
+
+/* =========================
+   AWARDS GRID / CARDS
+   ========================= */
+.awards-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:20px;
+  margin-top:20px;
+  z-index:10;
+}
+.award-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding:20px; border-radius:12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  border:1px solid var(--card-strong);
+  color: var(--muted);
+}
+.award-card h3 { color: var(--accent); margin-bottom:10px; }
+
+/* contact card */
+.contact {
+  text-align:center;
+  padding:32px 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px; box-shadow:0 6px 16px rgba(0,0,0,0.45);
 }
 
-.contact-item:hover {
-  transform: scale(1.05);
-}
-
-.contact-item:hover img {
-  transform: scale(1.1);
-}
-
-.projects .project {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  flex-wrap: wrap; /* ensures it stacks on small screens */
-}
-
-.projects .project > img {
-  width: 240px;
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  order: 2; /* forces image to appear on the right */
-  flex-shrink: 0;
-}
-
-.projects .project > div {
-  flex: 1 1 60%;
-  order: 1;
-  min-width: 250px;
-}
-
+/* =========================
+   Responsive tweaks
+   ========================= */
 @media (max-width: 768px) {
-  .projects .project {
-    flex-direction: column;
-  }
-
-  .projects .project > img,
-  .projects .project > div {
-    order: initial; /* reset order for small screens */
-    width: 100%;
-  }
+  .projects .project { flex-direction:column; align-items:flex-start; }
+  .profile-pic { width:100px; }
+  .navbar ul { gap:12px; flex-direction:column; align-items:center; }
+  section { padding:20px; }
+  #sidebar { width: 240px; }
 }
 
+/* small utilities */
+.hidden { display:none !important; }
