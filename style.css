@@ -43,8 +43,17 @@ body::-webkit-scrollbar {
   display: none;             /* Chrome, Safari, Opera */
 }
 
-input, textarea, [contenteditable="true"] {
-  caret-color: transparent;
+input, textarea, [contenteditable] {
+  caret-color: transparent !important;   /* make caret invisible */
+  outline: none !important;              /* hide focus ring if present */
+  box-shadow: none !important;           /* remove focus shadow if any */
+}
+
+/* ensure focus state also hides it */
+input:focus, textarea:focus, [contenteditable]:focus {
+  caret-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Parallax wrapper — keeps perspective local */
