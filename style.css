@@ -128,17 +128,21 @@ input, textarea, [contenteditable="true"] {
 
 
 /* foreground planet/shape */
-#planet {
+.planet {
   background: radial-gradient(circle at center, rgba(123,224,255,0.8), transparent 70%);
   width: 400px;
   height: 400px;
   border-radius: 50%;
   position: absolute;
-  bottom: 10%;
-  right: 15%;
   opacity: 0.3;
   filter: blur(4px);
 }
+
+#planet-1 { bottom: 10%; right: 15%; }
+#planet-2 { bottom: 5%; left: 10%; }
+#planet-3 { top: 40%; right: 8%; }
+#planet-4 { top: 10%; left: 5%; }
+#planet-5 { top: 80%; left: 60%; }
 
 
 /* subtle animations for interest */
