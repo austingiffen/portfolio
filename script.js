@@ -6,11 +6,40 @@ function toggleMenu() {
   hamburger.classList.toggle("active");
 }
 
-window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY;
+// optimized parallax scroll (drop into script.js, loaded at end of body)
+(() => {
+  const layers = Array.from(document.querySelectorAll('.parallax-layer'));
+  if (!layers.length) return;
 
-    document.querySelectorAll(".parallax-layer").forEach(layer => {
-      const speed = layer.getAttribute("data-speed");
-      layer.style.transform = `translateY(${scrollY * speed}px)`;
-    });
-  });
+  // convert speeds once, fallback to 0 if missing
+  const layerData = layers.map(l => ({
+    el: l,
+    speed: Math.max(0, parseFloat(l.dataset.speed || '0'))
+  }));
+
+  let latestScroll = window.scrollY;
+  let ticking = false;
+
+  function onScroll() {
+    latestScroll = window.scrollY || window.pageYOffset;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        layerData.forEach(({ el, speed }) => {
+          // smaller speed -> moves less (farther away),
+          // larger speed -> moves more (closer)
+          const y = latestScroll * speed;
+          el.style.transform = `translate3d(0, ${y}px, 0)`;
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  // passive option for smoother scrolling
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // run once to set initial positions (in case page isn't at 0)
+  onScroll();
+})();
+
