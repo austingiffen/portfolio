@@ -81,7 +81,7 @@ input:focus, textarea:focus, [contenteditable]:focus {
    are available if you add JS later for stronger parallax.
    ========================= */
 .space-bg {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 0;                 /* behind main content */
   pointer-events: none;
