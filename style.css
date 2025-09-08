@@ -23,6 +23,7 @@
 html { scroll-behavior: smooth; }
 html, body { height:100%; overflow-x:hidden; }
 
+
 /* Base body */
 body {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -34,7 +35,10 @@ body {
   margin: 0 auto;
   padding: 20px;
   line-height: 1.5;
-  cursor: none;
+}
+
+input, textarea, [contenteditable="true"] {
+  caret-color: transparent;
 }
 
 /* Parallax wrapper — keeps perspective local */
@@ -74,15 +78,39 @@ body {
 
 /* faint distant stars (big tiling pattern) */
 #stars-1 {
-  background-image: radial-gradient(white 1px, transparent 1px);
-  background-size: 3px 3px;
-  opacity: 0.3;
+  width: 2px;
+  height: 2px;
+  background: white;
+  box-shadow: 
+    100px 200px white, 
+    400px 150px white, 
+    600px 300px white, 
+    900px 500px white, 
+    1200px 250px white,
+    1500px 400px white;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
+
 #stars-2 {
-  background-image: radial-gradient(white 2px, transparent 2px);
-  background-size: 6px 6px;
-  opacity: 0.5;
+  width: 3px;
+  height: 3px;
+  background: white;
+  opacity: 0.6;
+  box-shadow: 
+    200px 100px white, 
+    500px 400px white, 
+    800px 200px white, 
+    1100px 300px white, 
+    1400px 100px white;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
+
 /* colorful, blurred nebula */
 #nebula {
   background: radial-gradient(circle at 30% 40%, rgba(155, 123, 255, 0.4), transparent 70%),
