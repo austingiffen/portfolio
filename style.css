@@ -39,14 +39,24 @@ body {
   scrollbar-width: none;     /* Firefox */
 
 }
+
 body::-webkit-scrollbar {
   display: none;             /* Chrome, Safari, Opera */
 }
 
-input, textarea, [contenteditable] {
-  caret-color: transparent !important;   /* make caret invisible */
-  outline: none !important;              /* hide focus ring if present */
-  box-shadow: none !important;           /* remove focus shadow if any */
+.no-caret,
+input.no-caret,
+textarea.no-caret,
+[contenteditable].no-caret {
+  caret-color: transparent !important;      /* hide caret color */
+  color: transparent !important;            /* caret uses color, make transparent */
+  text-shadow: 0 0 0 var(--text) !important;/* paint visible text using shadow */
+}
+
+/* keep placeholder readable (if applicable) */
+.no-caret::placeholder {
+  color: rgba(255,255,255,0.45) !important;
+  text-shadow: none !important;
 }
 
 /* ensure focus state also hides it */
