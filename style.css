@@ -313,7 +313,7 @@ footer {
 @media (max-width: 768px) {
   .projects .project { flex-direction:column; align-items:flex-start; }
   .profile-pic { width:100px; }
-  .navbar ul { gap:12px; flex-direction:column; align-items:center; }
+  /* .navbar ul { gap:12px; flex-direction:column; align-items:center; } */
   section { padding:20px; }
   #sidebar { width: 240px; }
 }
