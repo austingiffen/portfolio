@@ -54,41 +54,22 @@ body {
    We provide visual depth without needing JS; the small data-speed attrs
    are available if you add JS later for stronger parallax.
    ========================= */
-.space-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;                 /* behind main content */
-  pointer-events: none;
-  overflow: hidden;
-}
+/* Put space-bg behind the content but not negative */
+.space-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-/* Generic layer settings */
+/* Layers should sit inside the space-bg stacking context and not be negative */
 .parallax-layer {
+  position: absolute; /* absolute inside .space-bg */
   inset: 0;
+  z-index: 0;         /* same stacking, controlled by order or opacity */
   background-repeat: repeat;
   background-position: center;
   background-size: cover;
-  will-change: transform, opacity;
-  opacity: 1;
-  transform: translate3d(0,0,0);
-  mix-blend-mode: screen;
-}
-
-.parallax-layer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   pointer-events: none;
-  z-index: -1;
+  will-change: transform, opacity;
 }
+.parallax-wrapper { position: relative; z-index: 10; } /* content above */
 
-.parallax-wrapper {
-  /* This ensures the wrapper has a stacking context to contain the fixed elements */
-  position: relative;
-  overflow: hidden;
-}
 
 .space-bg {
   /* This ensures the space background covers the entire viewport initially */
