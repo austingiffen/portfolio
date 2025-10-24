@@ -1,8 +1,3 @@
-/* =========================
-   Austin Giffen — style.css
-   Reworked: high contrast + space background + parallax layers
-   Minimal HTML change: add .space-bg block inside .parallax-wrapper
-   ========================= */
 
 /* -------------------------
    Variables / Reset
@@ -51,25 +46,42 @@ body {
 /* =========================
    SPACE BACKGROUND (layers)
    These layers are fixed and visually parallax when page scrolls.
-   We provide visual depth without needing JS; the small data-speed attrs
-   are available if you add JS later for stronger parallax.
    ========================= */
-/* Put space-bg behind the content but not negative */
-.space-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-
-/* Layers should sit inside the space-bg stacking context and not be negative */
-.parallax-layer {
-  position: absolute; /* absolute inside .space-bg */
+.space-bg {
+  position: fixed;
   inset: 0;
-  z-index: 0;         /* same stacking, controlled by order or opacity */
+  z-index: 0;                 /* behind main content */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Generic layer settings */
+.parallax-layer {
+  inset: 0;
   background-repeat: repeat;
   background-position: center;
   background-size: cover;
-  pointer-events: none;
   will-change: transform, opacity;
+  opacity: 1;
+  transform: translate3d(0,0,0);
+  mix-blend-mode: screen;
 }
-.parallax-wrapper { position: relative; z-index: 10; } /* content above */
 
+.parallax-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.parallax-wrapper {
+  /* This ensures the wrapper has a stacking context to contain the fixed elements */
+  position: relative;
+  overflow: hidden;
+}
 
 .space-bg {
   /* This ensures the space background covers the entire viewport initially */
@@ -267,7 +279,7 @@ footer {
 .hamburger.active span:nth-child(2){ opacity:0; }
 .hamburger.active span:nth-child(3){ transform: rotate(-45deg) translate(5px,-5px); }
 
-/* Sidebar — note we target #sidebar (matches your index.html) */
+/* Sidebar — note target #sidebar (matches index.html) */
 #sidebar {
   position: fixed;
   top: 0;
