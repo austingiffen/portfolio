@@ -27,7 +27,7 @@ function toggleMenu() {
         layerData.forEach(({ el, speed }) => {
           // smaller speed -> moves less (farther away),
           // larger speed -> moves more (closer)
-          const y = latestScroll * speed;
+          const y = -latestScroll * speed;
           el.style.transform = `translate3d(0, ${y}px, 0)`;
         });
         ticking = false;
